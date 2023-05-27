@@ -76,8 +76,7 @@ export default async function searchManga(page) {
     hrefLinks.push(targetUrl);
   }
 
-  const startPageNumber = parseInt(chapterRange.split('-')[0]) + 1;
 
   // Fetch images
-  await getImage(hrefLinks, page, startPageNumber);
+  await getImage(hrefLinks, page);
 }

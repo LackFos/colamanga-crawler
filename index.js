@@ -14,7 +14,7 @@ import searchManga from './modules/searchManga.js';
   puppeteer.use(hidden());
   const browser = await puppeteer.launch({
     args: ['--no-sandbox'],
-    headless: false,
+    headless: true,
     ignoreHTTPSErrors: true,
     executablePath: executablePath(),
   });

@@ -9,11 +9,11 @@ import scrollToBottom from './scrollToBottom.js';
  * Fetch All Image
  * @param {string[]} hrefLinks Array of href links to fetch images from
  * @param {string} page Instance from puppeteer
- * @param {int} pageNumber Instance from puppeteer
  */
-export default async function getImage(hrefLinks, page, pageNumber) {
+export default async function getImage(hrefLinks, page) {
   // Ask user for the output image name
   const outputImageName = prompt('Nama Output File image (nama.webp) : ');
+  let ouputChapterNumber = parseInt(prompt('Nomor Output File image (nama-nomor.webp) : '));
 
   for (const hrefLink of hrefLinks) {
     console.log(`\nCrawling: ${hrefLink}`);
@@ -39,14 +39,14 @@ export default async function getImage(hrefLinks, page, pageNumber) {
       const screenshotPromises = [];
       for (const [index, imageElement] of imageElements.entries()) {
         const screenshotPromise = imageElement.screenshot({
-          path: `img/${outputImageName}-${pageNumber}-${index + 1}.webp`,
+          path: `img/${outputImageName}-${ouputChapterNumber}-${index + 1}.webp`,
         });
         screenshotPromises.push(screenshotPromise);
         progressBar.increment();
       }
 
       await Promise.all(screenshotPromises);
-      pageNumber += 1;
+      ouputChapterNumber += 1;
       progressBar.stop();
     } catch (error) {
       console.error(
